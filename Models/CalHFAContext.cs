@@ -22,6 +22,8 @@ namespace Cal_HFA.Models
         public virtual DbSet<LoanStatus> LoanStatuses { get; set; }
         public virtual DbSet<LoanType> LoanTypes { get; set; }
         public virtual DbSet<StatusCode> StatusCodes { get; set; }
+        public virtual DbSet<Output> Output { get; set; }
+       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,6 +37,8 @@ namespace Cal_HFA.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Output>().HasNoKey();
 
             modelBuilder.Entity<Loan>(entity =>
             {
@@ -169,7 +173,8 @@ namespace Cal_HFA.Models
                     .IsUnicode(false);
             });
 
-            OnModelCreatingPartial(modelBuilder);
+
+        OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
